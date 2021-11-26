@@ -21,11 +21,7 @@ constexpr uint64_t NUM_INSERTS = 10000000;
 constexpr uint64_t NUM_FINDS = NUM_INSERTS / 2;
 constexpr uint64_t INITIAL_CAPACITY = NUM_INSERTS * 2;
 
-uint64_t ops_per_s(uint64_t total_dur, uint64_t num_ops_per_run) {
-  const double dur_in_s = (double) total_dur / 1000;
-  const uint64_t total_ops = NUM_RUNS * num_ops_per_run;
-  return static_cast<uint64_t>(total_ops / dur_in_s);
-}
+uint64_t ops_per_s(uint64_t total_dur, uint64_t num_ops_per_run);
 
 template <typename MapT>
 void run_map( const std::string& name, const std::vector<uint64_t>& insert_keys, const std::vector<uint64_t>& find_keys) {
@@ -93,33 +89,5 @@ void run_index( const std::string& name, const std::vector<uint64_t>& insert_key
             << " average find/s: " << ops_per_s(find_dur, NUM_FINDS) << std::endl;
 };
 
-int main() {
-  using FancyIndex = FancyMap<uint64_t>;
-  using StdIndex = std::unordered_map<KeyT, uint64_t>;
-
-  using FancyMap = FancyMap<MyValue>;
-  using StdMap = std::unordered_map<KeyT, MyValue>;
-
-  std::random_device dev;
-  std::mt19937 rng{dev()};
-  std::uniform_int_distribution<std::mt19937::result_type> dist(1, NUM_INSERTS);
-
-  std::vector<uint64_t> insert_keys{};
-  insert_keys.resize(NUM_INSERTS);
-  for (uint64_t i = 1; i <= NUM_INSERTS; ++i) {
-    insert_keys[i] = i;
-  }
-  std::shuffle(insert_keys.begin(), insert_keys.end(), rng);
-
-  std::vector<uint64_t> find_keys{};
-  find_keys.reserve(NUM_FINDS);
-  for (uint64_t i = 0; i < NUM_FINDS; ++i) {
-    find_keys.emplace_back(dist(rng));
-  }
-
-  run_map<StdMap>("StdMap    ", insert_keys, find_keys);
-  run_index<StdIndex>("StdIndex  ", insert_keys, find_keys);
-
-  run_map<FancyMap>("FancyMap  ", insert_keys, find_keys);
-  run_index<FancyIndex>("FancyIndex", insert_keys, find_keys);
-}
+std::vector<uint64_t> generate_find_keys();
+std::vector<uint64_t> generate_insert_keys();
