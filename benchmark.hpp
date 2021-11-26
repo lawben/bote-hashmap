@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <random>
+#include <chrono>
 
 #include "fancy_index.hpp"
 

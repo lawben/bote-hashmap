@@ -1,5 +1,6 @@
 #include "benchmark.hpp"
 #include <random>
+#include <algorithm>
 
 std::vector<uint64_t> generate_find_keys() {
   std::random_device dev;
