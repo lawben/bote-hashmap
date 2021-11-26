@@ -4,7 +4,8 @@ project(bote_hashmap)
 set(CMAKE_CXX_STANDARD 17)
 
 if(NOT CMAKE_BUILD_TYPE)
-    SET(CMAKE_BUILD_TYPE RelWithDebInfo)
+    SET(CMAKE_BUILD_TYPE Release)
+    add_compile_options(-g -O3)
 endif()
 
 set(SOURCES fancy_index.hpp benchmark.cpp benchmark.hpp)

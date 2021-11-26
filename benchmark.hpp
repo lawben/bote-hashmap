@@ -18,7 +18,7 @@ struct MyValue {
 };
 
 constexpr uint64_t NUM_RUNS = 3;
-constexpr uint64_t NUM_INSERTS = 10000000;
+constexpr uint64_t NUM_INSERTS = 100000000;
 constexpr uint64_t NUM_FINDS = NUM_INSERTS / 2;
 constexpr uint64_t INITIAL_CAPACITY = NUM_INSERTS * 2;
 

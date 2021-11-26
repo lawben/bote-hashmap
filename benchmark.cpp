@@ -5,7 +5,7 @@
 std::vector<uint64_t> generate_find_keys() {
   std::random_device dev;
   std::mt19937 rng{dev()};
-  std::uniform_int_distribution<std::mt19937::result_type> dist(1, NUM_INSERTS);
+  std::uniform_int_distribution<std::mt19937::result_type> dist(1, NUM_INSERTS - 1);
 
   std::vector<uint64_t> find_keys{};
   find_keys.reserve(NUM_FINDS);
@@ -16,15 +16,14 @@ std::vector<uint64_t> generate_find_keys() {
 }
 
 std::vector<uint64_t> generate_insert_keys() {
-  std::random_device dev;
-  std::mt19937 rng{dev()};
-  std::uniform_int_distribution<std::mt19937::result_type> dist(1, NUM_INSERTS);
-
   std::vector<uint64_t> insert_keys{};
   insert_keys.resize(NUM_INSERTS);
   for (uint64_t i = 1; i <= NUM_INSERTS; ++i) {
     insert_keys[i] = i;
   }
+
+  std::random_device dev;
+  std::mt19937 rng{dev()};
   std::shuffle(insert_keys.begin(), insert_keys.end(), rng);
   return insert_keys;
 }
