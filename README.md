@@ -1,6 +1,6 @@
 ## Back of the Envelope Calculation for Software Engineers
 
-This is just a small example of hwo to quickly evaluate your ideas and understand where performance goes.
+This is just a small example of how to quickly evaluate your ideas and understand where performance goes.
 To run the code:
 
 ```shell
